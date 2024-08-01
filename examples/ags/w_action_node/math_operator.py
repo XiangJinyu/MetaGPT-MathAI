@@ -46,10 +46,8 @@ class Format(Operator):
     async def __call__(self, problem_description):
         try:
             prompt = ANSWER_FORMAT_PROMPT.format(problem_description=problem_description)
-            print(f"Generated Prompt for Format: {prompt}")  # 调试信息
             node = await ActionNode.from_pydantic(GenerateOp).fill(context=prompt, llm=self.llm)
             response = node.instruct_content.model_dump()
-            print(f"Response from Format: {response}")  # 调试信息
             return response
         except Exception as e:
             print(f"Error in Format: {e}")  # 错误信息

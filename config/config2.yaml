@@ -1,0 +1,8 @@
+# Full Example: https://github.com/geekan/MetaGPT/blob/main/config/config2.example.yaml
+# Reflected Code: https://github.com/geekan/MetaGPT/blob/main/metagpt/config2.py
+# Config Docs: https://docs.deepwisdom.ai/main/en/guide/get_started/configuration.html
+llm:
+  api_type: "openai"  # or azure / ollama / open_llm etc. Check LLMType for more options
+  base_url: "https://oneapi.deepwisdom.ai/v1"
+  api_key: "sk-uZKPDYWRjoxzYseY737eFeFa4b57433d8a0dFaE5C1C7B6B0"
+  model: "deepseek-chat"  # or gpt-3.5-turbo-1106 / gpt-4-1106-preview
