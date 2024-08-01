@@ -1,24 +1,9 @@
-# -*- coding: utf-8 -*-
-# @Date    : 6/27/2024 17:36 PM
-# @Author  : didi
-# @Desc    : operator demo of ags
-import ast
-import sys
-import traceback
-import random
-from typing import List, Tuple, Any, Dict
-from collections import Counter
-
 from metagpt.actions.action_node import ActionNode
 from metagpt.llm import LLM
 
-from examples.ags.w_action_node.operator_an import GenerateOp, GenerateCodeOp, GenerateCodeBlockOp, ReviewOp, ReviseOp, \
-    FuEnsembleOp, MdEnsembleOp, ReflectionTestOp, RephraseOp
+from examples.ags.w_action_node.operator_an import GenerateOp, RephraseOp
 from examples.ags.w_action_node.math_prompt import GENERATE_PROMPT, REPHRASE_ON_PROBLEM_PROMPT, ANSWER_FORMAT_PROMPT
-from examples.ags.w_action_node.prompt import DE_ENSEMBLE_CODE_FORMAT_PROMPT, DE_ENSEMBLE_TXT_FORMAT_PROMPT, \
-    DE_ENSEMBLE_ANGEL_PROMPT, DE_ENSEMBLE_DEVIL_PROMPT, DE_ENSEMBLE_JUDGE_UNIVERSAL_PROMPT, \
-    DE_ENSEMBLE_JUDGE_FINAL_PROMPT
-from examples.ags.w_action_node.utils import test_cases_2_test_functions
+
 
 class Operator:
     def __init__(self, name, llm: LLM):

@@ -1,25 +1,6 @@
-# -*- coding: utf-8 -*-
-# @Date    : 6/26/2024 17:07 PM
-# @Author  : didi
-# @Desc    : prompts of operators
-
 GENERATE_PROMPT = """
 Generate Solution for the following problem: {problem_description}
 """
-
-# GENERATE_CODE_PROMPT = """
-# Below is an instruction that describes a task, paired with an input that provides further context.
-# Write a response that appropriately completes the request.
-
-# ### Instruction:
-# Write a program to perform the given task.
-
-# Input:
-# {problem_description}
-
-# ### Response:
-# """
-
 
 REPHRASE_ON_PROBLEM_PROMPT = """
 You are presented with a math contest question:
