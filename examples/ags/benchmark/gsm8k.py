@@ -18,7 +18,7 @@ from deepeval.benchmarks.gsm8k.template import GSM8KTemplate
 import pandas as pd
 from tqdm.asyncio import tqdm_asyncio
 
-solver = Gsm8kGraph(name="solver", llm=LLM())
+solver = Gsm8kGraph(name="solver", llm=LLM(), criteria="correctness, efficiency, readability", vote_count=5)
 
 from deepeval.models.base_model import DeepEvalBaseLLM
 
@@ -26,7 +26,7 @@ from deepeval.models.base_model import DeepEvalBaseLLM
 # 这里是DeepEval强制定义的模型基础格式，这里不需要进行改动，只需要调用即可
 class OpenAI(DeepEvalBaseLLM):
     def __init__(self):
-        self.solver = Gsm8kGraph(name="solver", llm=LLM())
+        self.solver = Gsm8kGraph(name="solver", llm=LLM(), criteria="correctness, efficiency, readability", vote_count=5)
 
     def load_model(self):
         # 这里应该是加载模型的逻辑
@@ -55,7 +55,7 @@ async def async_evaluate_problem(model, golden, benchmark, semaphore):
         enable_cot=benchmark.enable_cot,
     )
 
-    max_retries = 5
+    max_retries = 1
     retries = 0
 
     async with semaphore:
@@ -78,7 +78,7 @@ async def async_evaluate_problem(model, golden, benchmark, semaphore):
     return golden.input, prediction, golden.expected_output, score
 
 
-async def evaluate_benchmark(benchmark, model, max_concurrent_tasks=20):
+async def evaluate_benchmark(benchmark, model, max_concurrent_tasks=5):
     semaphore = asyncio.Semaphore(max_concurrent_tasks)
     goldens = benchmark.load_benchmark_dataset()[:benchmark.n_problems]
     tasks = [async_evaluate_problem(model, golden, benchmark, semaphore) for golden in goldens]
@@ -107,7 +107,7 @@ if __name__ == '__main__':
 
     # 定义 benchmark,problems代表测试问题数,注释掉就可以完整测试,n_shot设置为0当前为zero shot,enable_cot是官方的COT的Prompt，建议关闭，用我们自己的graph实现
     benchmark = GSM8K(
-        # n_problems=100,
+        # n_problems=10,
         n_shots=0,
         enable_cot=False
     )
